@@ -1,0 +1,41 @@
+@model IEnumerable<baitap.Models.Movie>
+
+@{
+    ViewData["Title"] = "Danh sách phim";
+}
+
+<h2>Danh sách phim</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">+ Thêm phim mới</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Genre</th>
+            <th>Duration</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Title</td>
+                <td>@item.ReleaseDate.ToString("yyyy")</td>
+                <td>@item.Genre?.Name</td>
+                <td>@item.Duration</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Bạn có chắc muốn xóa phim này?');">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
